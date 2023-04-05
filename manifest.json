@@ -1,0 +1,14 @@
+{
+    "name": "Linear App Widget",
+    "id": "1225499170325764543",
+    "api": "1.0.0",
+    "editorType": ["figma", "figjam"],
+    "permissions": ["activeusers", "currentuser"],
+    "containsWidget": true,
+    "main": "dist/code.js",
+    "ui": {
+      "main": "dist/index.html"
+    },
+    "widgetApi": "1.0.0"
+  }
+  

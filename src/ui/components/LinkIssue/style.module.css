@@ -1,0 +1,70 @@
+.container {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: space-between;
+  height: calc(100% - 32px);
+  padding: 12px 16px;
+  background-color: #f7fafb;
+  font-family: sans-serif;
+}
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.formGroup label {
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+.input {
+  padding: 8px 12px;
+  border: 1px solid #000;
+  border-radius: 4px;
+  background-color: #f7fafb;
+}
+.errorInput {
+  border: 1px solid #c60000;
+  background-color: #fdeded;
+  color: #5f2120
+}
+.inputErrorMessage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  margin: 8px 0;
+  padding: 4px 8px;
+  border-radius: 4px;
+  background: #fdeded;
+  color: #5f2120
+}
+svg.errorIcon {
+  width: 14px;
+  height: 14px;
+  fill: #d32f2f;
+}
+.submitBtn {
+  color: #fff;
+  background-color: #6e79d6;
+  padding: 0px 4px;
+  box-shadow: rgba(0, 0, 0, 0.09) 0px 1px 2px;
+  max-height: 28px;
+  min-height: 28px;
+  border-radius: 4px;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  cursor: pointer; 
+  margin-top: 12px;
+}
+.submitBtn:not(:disabled):hover {
+  background-color: #5c67c7;
+}
+.submitBtn:disabled {
+  cursor: default;
+  opacity: 0.8;
+}

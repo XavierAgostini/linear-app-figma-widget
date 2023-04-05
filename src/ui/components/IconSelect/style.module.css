@@ -1,0 +1,47 @@
+:global(.react-select-container) {
+  flex: 1;
+  font-family: sans-serif;
+}
+:global(.react-select-container .react-select__menu-list) {
+  padding: 0;
+}
+:global(.react-select-container .react-select__control) {
+  min-height: 30px;
+}
+:global(.react-select-container .react-select__input-container) {
+  padding: 0;
+  margin: 0;
+}
+:global(.react-select-container .react-select__menu) {
+  width: auto;
+}
+:global(.react-select-container .react-select__option ) {
+  width: auto;
+}
+:global(.react-select__option--is-selected) {
+  background-color: #dbedfc !important;
+  color: #000 !important;
+}
+:global(.react-select__indicators) {
+  display: none !important;
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  padding: 0;
+}
+.selectedOption {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+}
+.optionLabel {
+  max-width: 150px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

@@ -1,0 +1,6 @@
+node_modules
+dist
+dist-server
+server/node_modules
+.vscode
+.env
