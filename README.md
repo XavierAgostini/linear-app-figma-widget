@@ -1,3 +1,4 @@
+![Linear Figma Widget Banner](https://user-images.githubusercontent.com/7476817/230168136-13a346f7-61cc-48c2-9ab3-5c7230c76e56.png)
 # Linear App Figma Widget
 
 This Linear & Figma integration is the ultimate solution to streamline your design workflow. With this powerful integration, you can easily create issues directly from your Figma designs and import existing ones. This saves you valuable time and effort, allowing you to focus on what really matters - creating exceptional designs. Plus, collaboration has never been easier. You can seamlessly work with your team to ensure everyone is on the same page and your projects stay organized. Experience the benefits of a truly integrated design experience and take your collaboration to the next level.
