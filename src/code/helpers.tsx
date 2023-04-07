@@ -49,31 +49,48 @@ function incrementRomanNumeral(romanNumeral) {
 }
 
 function renderParagraphData(contentNode, index) {
+  const isHeading = contentNode?.type === 'heading'
+  const headingLevel = contentNode?.attrs?.level
+  const textFontSize = isHeading ? 22 - (headingLevel - 1) * 2 : 16
   const paragraphNodes = (contentNode?.content || []).map((textNode, index) => {
-    const textEffects: { [elKey: string]: any } = {}
-    if (textNode?.marks) {
-      textNode.marks.forEach(mark => {
-        if (mark.type === 'link') {
-          textEffects.href = mark.attrs.href
-          textEffects.fill = '#2161dc'
-        }
-        if (mark.type === 'strong') {
-          textEffects.fontWeight = "bold"
-        }
-        if (mark.type === 'em') {
-          textEffects.italic = null
-        }
-        if (mark.type === 'strike') {
-          textEffects.textDecoration ='strikethrough'
-        }
-        if (mark.type === 'underline') {
-          textEffects.textDecoration = 'underline'
-        }
-      })
+    if (textNode.type === 'text') {
+      const textEffects: { [elKey: string]: any } = {}
+      if (textNode?.marks) {
+        textNode.marks.forEach(mark => {
+          if (mark.type === 'link') {
+            textEffects.href = mark.attrs.href
+            textEffects.fill = '#2161dc'
+          }
+          if (mark.type === 'strong') {
+            textEffects.fontWeight = "bold"
+          }
+          if (mark.type === 'em') {
+            textEffects.italic = true
+          }
+          if (mark.type === 'strike') {
+            textEffects.textDecoration ='strikethrough'
+          }
+          if (mark.type === 'underline') {
+            textEffects.textDecoration = 'underline'
+          }
+        })
+      }
+      // if text is empty, add a new line
+      const text = textNode?.text ? textNode.text.toString() : '\n'
+      return <Span key={index} {...textEffects}>{textNode.text.toString()}</Span>
     }
-    return <Span key={index} {...textEffects}>{textNode.text.toString()}</Span>
-  })
-  return <Text key={`paragraph-${index}`} width={'fill-parent'}>{paragraphNodes}</Text>
+    if (textNode.type === 'emoji') {
+      return <Span key={index}>{textNode?.attrs?.label}</Span>
+    }
+    if (textNode.type === "suggestion_userMentions") {
+      return <Span key={index} fill="#282a30">@{textNode?.attrs?.label}</Span>
+    }
+    if (textNode.type === "issueMention") {
+      return <Span key={index} fill="#2161dc" href={textNode?.attrs?.href}>{textNode?.attrs?.label}</Span>
+    }
+    return null
+  }).filter(Boolean)
+  return <Text key={`paragraph-${index}`} width={'fill-parent'} fontSize={textFontSize}>{paragraphNodes}</Text>
 }
 
 const getBulletItemText = (nestingLevel) => {
@@ -125,6 +142,9 @@ export function prosemirrorToWidgetReact(linearIssue: LinearIssue, openLinearTic
       if (contentNode.type === 'paragraph') {
         return renderParagraphData(contentNode, i)
       }
+      else if (contentNode.type === 'heading') {
+        return renderParagraphData(contentNode, i)
+      }
       else if (contentNode.type === 'blockquote') {
         const blockQuoteContent = contentNode.content.map((childNode, j) => renderParagraphData(childNode, j))
         return (
@@ -159,6 +179,9 @@ export function prosemirrorToWidgetReact(linearIssue: LinearIssue, openLinearTic
       else if (contentNode.type === 'code_block') {
         const content = renderParagraphData(contentNode, i)
         return <AutoLayout key={i} width={'fill-parent'} padding={18} fill="#E4E6EA">{content}</AutoLayout>
+      }
+      else if (contentNode.type === 'horizontal_rule') {
+        return <Line key={i} stroke="#E5E5E5" strokeWidth={1} length='fill-parent' />
       }
       else if (contentNode.type === "bullet_list") {
         return renderListData(contentNode)

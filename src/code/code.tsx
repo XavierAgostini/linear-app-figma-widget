@@ -79,18 +79,17 @@ function LinearAppWidget() {
 		try {
 			const widgetNode = figma.getNodeById(widgetNodeId) as WidgetNode;
 			if (!widgetNode) return;
-
 			// check if linked issue already exists
 			
 			const issueSlug = data.identifier
 
 			const widgetId = widgetNode.widgetId
 			const allWidgetNodes: WidgetNode[] = (figma.currentPage.findAll(node => {
-				return node.type === "WIDGET"
+				return node?.type === "WIDGET"
 			})) as WidgetNode[]
 
 			const myWidgetNodes: WidgetNode[] = allWidgetNodes.filter(node => {
-				return node.widgetId === widgetId
+				return node?.widgetId === widgetId
 			})
 
 			const preExistingLinearIssueWidget = myWidgetNodes.find(node =>  node?.widgetSyncedState?.linearIssue?.identifier === issueSlug)
@@ -101,6 +100,7 @@ function LinearAppWidget() {
 				figma.closePlugin();
 				return
 			}
+
 			const clonedNode = widgetNode.cloneWidget({
 				'linearIssue': data,
 				'lastSynced': (new Date()).toUTCString(),
