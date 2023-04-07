@@ -136,7 +136,7 @@ function renderListData(contentNode, nestingLevel = 0) {
   return <AutoLayout direction="vertical" padding={{ top: 0, bottom: 4, left: 8 }} width={'fill-parent'} spacing={8}>{listNodes}</AutoLayout>
 }
 
-export function prosemirrorToWidgetReact(linearIssue: LinearIssue, openLinearTicketURL: () => void) {
+export function prosemirrorToWidgetReact(linearIssue: LinearIssue, openLinearTicketURL: () => void, openURL: (url: string) => void) {
   try {
     const data = JSON.parse(linearIssue?.descriptionData)
     const children = data.content.map((contentNode, i) => {
@@ -158,10 +158,11 @@ export function prosemirrorToWidgetReact(linearIssue: LinearIssue, openLinearTic
             blendMode="normal"
             hoverStyle={{ opacity: 0.8 }}
             padding={16}
+            onClick={() => openURL(contentNode.attrs.href)}
           >
             <SVG src={FigmaIcon} height={18} width={12}/>
             <AutoLayout width={'fill-parent'}>
-              <Text width={'fill-parent'} href={contentNode.attrs.href}><Span>{contentNode.attrs.nodeName}{contentNode.attrs.nodeName}</Span><Span fill="#6b6f76"> - {contentNode.attrs.title}</Span></Text>
+              <Text width={'fill-parent'}><Span>{contentNode.attrs.nodeName}{contentNode.attrs.nodeName}</Span><Span fill="#6b6f76"> - {contentNode.attrs.title}</Span></Text>
             </AutoLayout>
           </AutoLayout>
         )

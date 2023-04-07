@@ -183,6 +183,15 @@ function LinearAppWidget() {
 		};
 	});
 
+	const openURL = (url: string) => {
+		waitForTask(new Promise(resolve => {
+			const openLinkUIString = `<script>window.open('${url}','_blank');</script>`
+			figma.showUI(openLinkUIString, { visible: false})
+			setTimeout(() => {
+				resolve(null)
+			}, 1000)
+		}));
+	}
 	const openLinearTicketURL = () => {
 		waitForTask(new Promise(resolve => {
 			const openLinkUIString = `<script>window.open('${linearIssue?.url}','_blank');</script>`
@@ -427,7 +436,7 @@ function LinearAppWidget() {
 									>
 										<Text fill="#6b6f76">Description:</Text>
 
-										{prosemirrorToWidgetReact(linearIssue, openLinearTicketURL)}
+										{prosemirrorToWidgetReact(linearIssue, openLinearTicketURL, openURL)}
 									</AutoLayout>
 								</AutoLayout>
 							</Fragment>
