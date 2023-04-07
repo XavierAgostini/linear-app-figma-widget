@@ -4,7 +4,8 @@ const { AutoLayout, Frame, Image, Fragment, Span, SVG, Text, Input, Ellipse, Lin
 import { 
   CheckedCheckedBoxIcon,
   UncheckedCheckedBoxIcon,
-  VideoIcon
+  VideoIcon,
+  FigmaIcon
 } from "./components/icons"
 import { LinearIssue } from "./types";
 function incrementRomanNumeral(romanNumeral) {
@@ -144,6 +145,26 @@ export function prosemirrorToWidgetReact(linearIssue: LinearIssue, openLinearTic
       }
       else if (contentNode.type === 'heading') {
         return renderParagraphData(contentNode, i)
+      }
+      else if (contentNode.type === 'figma') {
+        return (
+          <AutoLayout
+            key={i}
+            width={'fill-parent'}
+            spacing={10}
+            cornerRadius={4}
+            fill="#fff"
+            stroke={"#e1e4e8"}
+            blendMode="normal"
+            hoverStyle={{ opacity: 0.8 }}
+            padding={16}
+          >
+            <SVG src={FigmaIcon} height={18} width={12}/>
+            <AutoLayout width={'fill-parent'}>
+              <Text width={'fill-parent'} href={contentNode.attrs.href}><Span>{contentNode.attrs.nodeName}{contentNode.attrs.nodeName}</Span><Span fill="#6b6f76"> - {contentNode.attrs.title}</Span></Text>
+            </AutoLayout>
+          </AutoLayout>
+        )
       }
       else if (contentNode.type === 'blockquote') {
         const blockQuoteContent = contentNode.content.map((childNode, j) => renderParagraphData(childNode, j))
