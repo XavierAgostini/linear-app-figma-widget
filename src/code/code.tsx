@@ -187,7 +187,9 @@ function LinearAppWidget() {
 		waitForTask(new Promise(resolve => {
 			const openLinkUIString = `<script>window.open('${linearIssue?.url}','_blank');</script>`
 			figma.showUI(openLinkUIString, { visible: false})
-			resolve(null)
+			setTimeout(() => {
+				resolve(null)
+			}, 1000)
 		}));
 	}
 
