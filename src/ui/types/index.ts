@@ -16,6 +16,10 @@ export interface LinearTeamMetadata {
       avatarUrl?: string;
     }[]
   }
+  issueEstimationAllowZero: boolean
+  issueEstimationExtended: boolean
+  defaultIssueEstimate: number
+  issueEstimationType: 'notUsed' | 'exponential' | 'linear' | 'fibonacci' | 'tShirt';
   defaultIssueState: {
     id: string;
   }
@@ -46,6 +50,13 @@ export interface LinearIssue {
   descriptionData: string;
   priority: number;
   priorityLabel: string;
+  estimate: number | null;
+  team: {
+    issueEstimationAllowZero: boolean;
+    issueEstimationExtended: boolean;
+    defaultIssueEstimate: number;
+    issueEstimationType: 'notUsed' | 'exponential' | 'linear' | 'fibonacci' | 'tShirt';
+  }
   labels: {
     nodes: {
       name: string;

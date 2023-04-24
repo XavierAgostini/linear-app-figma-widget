@@ -15,6 +15,10 @@ query ($teamId: String!) {
       defaultIssueState {
         id
       }
+      issueEstimationAllowZero
+      issueEstimationExtended
+      defaultIssueEstimate
+      issueEstimationType
       states {
           nodes {
               name

@@ -18,7 +18,6 @@ export const useLinearAuth = (skipLinearAuth = false) => {
   const initLinearOauthFlow = async () => {
     setIsLoading(true)
     const linearOauthURL = `https://linear.app/oauth/authorize?client_id=${LINEAR_CLIENT_ID}&redirect_uri=${encodeURIComponent(LINEAR_REDIRECT_URI)}&response_type=code&state=${socketId.current}&scope=read,write&prompt=consent`
-    console.log('linearOauthURL',linearOauthURL)
     window.open(linearOauthURL)
   }
 
