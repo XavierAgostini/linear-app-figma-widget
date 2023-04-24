@@ -148,21 +148,21 @@ const CreateIssue = () => {
       return [0,1,2,3,4,5,6,7].slice(start, end).map(value => ({
         label: value.toString(),
         value,
-        icon: <LinearEstimateIcon width={14} height={14}/>
+        icon: <LinearEstimateIcon width={12} height={12}/>
       }))
     }
     if (selectedTeam.issueEstimationType === 'exponential') {
       return [0,1,2,4,8,16,32,64].slice(start, end).map(value => ({
         label: value.toString(),
         value,
-        icon: <LinearEstimateIcon width={16} height={16}/>
+        icon: <LinearEstimateIcon width={12} height={12}/>
       }))
     }
     if (selectedTeam.issueEstimationType === 'fibonacci') {
       return [0,1,2,3,5,8,13,21].slice(start, end).map(value => ({
         label: value.toString(),
         value,
-        icon: <LinearEstimateIcon width={16} height={16}/>
+        icon: <LinearEstimateIcon width={12} height={12}/>
       }))
     }
     if (selectedTeam.issueEstimationType === 'tShirt') {
@@ -179,7 +179,7 @@ const CreateIssue = () => {
       return [0,1,2,3,5,8,13,21].slice(0, end).map(value => ({
         label: tshirtSizeMap[value],
         value,
-        icon: <LinearEstimateIcon width={16} height={16}/>
+        icon: <LinearEstimateIcon width={12} height={12}/>
       }))
     }
     return []
