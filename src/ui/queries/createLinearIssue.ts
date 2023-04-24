@@ -14,12 +14,13 @@ attachmentLinkURL(
 }
 `
 export const createTicketMutation = (includeAttachment: boolean) => `
-mutation ($issueId: String!, $title: String!, $description: String!, $teamId: String!,$userId: String, $priorityNumber: Int, ${includeAttachment ?  '$linkedFigmaURL: String!,': ''} $stateId: String!, $labelIds: [String!]) {
+mutation ($issueId: String!, $title: String!, $description: String!, $estimate: Int, $teamId: String!,$userId: String, $priorityNumber: Int, ${includeAttachment ?  '$linkedFigmaURL: String!,': ''} $stateId: String!, $labelIds: [String!]) {
   issueCreate(
     input: {
       id: $issueId
       title: $title
       description: $description
+      estimate: $estimate
       teamId: $teamId
       assigneeId: $userId
       priority: $priorityNumber
@@ -36,6 +37,13 @@ mutation ($issueId: String!, $title: String!, $description: String!, $teamId: St
         descriptionData
         priority
         priorityLabel
+        estimate
+        team {
+          issueEstimationAllowZero
+          issueEstimationExtended
+          defaultIssueEstimate
+          issueEstimationType
+        }
         labels {
             nodes {
                 name
@@ -69,6 +77,7 @@ interface CreateTicketInput {
   teamId: string;
   title: string;
   description: string;
+  estimate?: number;
   userId?: string;
   priorityNumber?: string;
   stateId?: string;
@@ -77,11 +86,10 @@ interface CreateTicketInput {
 }
 export const createLinearIssue = async (input: CreateTicketInput) => {
   try {
-    const { token, teamId, title, description, userId, priorityNumber, stateId, labelIds, linkedFigmaURL } = input
+    const { token, teamId, title, description, estimate, userId, priorityNumber, stateId, labelIds, linkedFigmaURL } = input
 
     const issueId = uuidv4();
     const includeAttachment = Boolean(linkedFigmaURL);
-    console.log('linkedFigmaURL',{linkedFigmaURL, includeAttachment})
 
     const query = createTicketMutation(includeAttachment)
     const { data } = await axios.post(
@@ -93,6 +101,7 @@ export const createLinearIssue = async (input: CreateTicketInput) => {
           teamId,
           title,
           description,
+          estimate,
           userId,
           priorityNumber,
           stateId,

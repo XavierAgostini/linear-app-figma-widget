@@ -10,6 +10,13 @@ query ($issueId: String!) {
     descriptionData
     priority
     priorityLabel
+    estimate
+    team {
+      issueEstimationAllowZero
+      issueEstimationExtended
+      defaultIssueEstimate
+      issueEstimationType
+    }
     attachments {
       nodes {
           id

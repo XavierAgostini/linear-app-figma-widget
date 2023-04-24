@@ -47,6 +47,10 @@ const mockTeamData = {
           }
         ]
       },
+      issueEstimationAllowZero: true,
+      issueEstimationExtended: true,
+      idefaultIssueEstimate: 1,
+      issueEstimationType: "tShirt",
       states: {
         nodes: [
           {

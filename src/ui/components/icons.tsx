@@ -7,10 +7,10 @@ export const LinearBacklogIcon = ({ color } : {color: string}) => (
 )
 
 export const LinearTodoIcon = ({ color } : {color: string}) => (
-  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-label="Todo" ><rect x="1" y="1" width="12" height="12" rx="6" stroke={color} stroke-width="2" fill="none"></rect><path fill={color} stroke="none" d="M 3.5,3.5 L3.5,0 A3.5,3.5 0 0,1 3.5, 0 z" transform="translate(3.5,3.5)"></path></svg>
+  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-label="Todo" ><rect x="1" y="1" width="12" height="12" rx="6" stroke={color} strokeWidth="2" fill="none"></rect><path fill={color} stroke="none" d="M 3.5,3.5 L3.5,0 A3.5,3.5 0 0,1 3.5, 0 z" transform="translate(3.5,3.5)"></path></svg>
 )
 export const LinearInProgressIcon = ({ color } : {color: string}) => (
-  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-label="In Progress" ><rect x="1" y="1" width="12" height="12" rx="6" stroke={color} stroke-width="2" fill="none"></rect><path fill={color} stroke="none" d="M 3.5,3.5 L3.5,0 A3.5,3.5 0 0,1 3.5, 7 z" transform="translate(3.5,3.5)"></path></svg>
+  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-label="In Progress" ><rect x="1" y="1" width="12" height="12" rx="6" stroke={color} strokeWidth="2" fill="none"></rect><path fill={color} stroke="none" d="M 3.5,3.5 L3.5,0 A3.5,3.5 0 0,1 3.5, 7 z" transform="translate(3.5,3.5)"></path></svg>
 )
 
 export const LinearDoneIcon = ({ color } : {color: string}) => (
@@ -28,11 +28,11 @@ export const LinearHighPriorityIcon = (
 <svg fill="#00000070" width="16" height="16" viewBox="0 0 16 16" aria-label="High Priority"><rect x="1" y="8" width="3" height="6" rx="1"></rect><rect x="6" y="5" width="3" height="9" rx="1"></rect><rect x="11" y="2" width="3" height="12" rx="1"></rect></svg>
 )
 export const LinearMediumPriorityIcon = (
-  <svg fill="#00000070" width="16" height="16" viewBox="0 0 16 16" aria-label="Medium Priority"><rect x="1" y="8" width="3" height="6" rx="1"></rect><rect x="6" y="5" width="3" height="9" rx="1"></rect><rect x="11" y="2" width="3" height="12" rx="1" fill-opacity="0.4"></rect></svg>
+  <svg fill="#00000070" width="16" height="16" viewBox="0 0 16 16" aria-label="Medium Priority"><rect x="1" y="8" width="3" height="6" rx="1"></rect><rect x="6" y="5" width="3" height="9" rx="1"></rect><rect x="11" y="2" width="3" height="12" rx="1" fillOpacity="0.4"></rect></svg>
 )
 
 export const LinearLowPriorityIcon = (
-  <svg fill="#00000070" width="16" height="16" viewBox="0 0 16 16" aria-label="Low Priority"><rect x="1" y="8" width="3" height="6" rx="1"></rect><rect x="6" y="5" width="3" height="9" rx="1" fill-opacity="0.4"></rect><rect x="11" y="2" width="3" height="12" rx="1" fill-opacity="0.4"></rect></svg>
+  <svg fill="#00000070" width="16" height="16" viewBox="0 0 16 16" aria-label="Low Priority"><rect x="1" y="8" width="3" height="6" rx="1"></rect><rect x="6" y="5" width="3" height="9" rx="1" fillOpacity="0.4"></rect><rect x="11" y="2" width="3" height="12" rx="1" fillOpacity="0.4"></rect></svg>
 )
 
 export const LinearUrgentPriorityIcon = (
@@ -45,4 +45,10 @@ export const LinearNoPriorityIcon = (
 
 export const LinearUnassignedIcon = (
   <svg width="16" height="16" viewBox="0 0 16 16" fill="#6B6F76"><path d="M8 4a2 2 0 0 0-2 2v.5a2 2 0 0 0 4 0V6a2 2 0 0 0-2-2Z"></path><path fillRule="evenodd" clipRule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14Zm-2.879-4.121-1.01 1.01a5.5 5.5 0 1 1 7.778 0l-1.01-1.01A3 3 0 0 0 8.757 10H7.243a3 3 0 0 0-2.122.879Z"></path></svg>
+)
+
+export const LinearEstimateIcon = (props: any) => (
+  <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
+    <path d="M13.8648 0.537235C16.0202 -0.65249 18.6951 0.199919 19.8393 2.44116L31.4841 25.2512C31.8229 25.9147 32 26.6546 32 27.4055C32 29.9431 30.0217 32 27.5815 32H4.41944C3.70389 32 2.99907 31.8194 2.3655 31.4734C0.204897 30.294 -0.627067 27.5164 0.507297 25.2697L12.0244 2.45965C12.4378 1.64084 13.0792 0.970835 13.8648 0.537235ZM15.9155 3.44671C15.7473 3.44991 15.5773 3.49322 15.4186 3.58083C15.2222 3.68924 15.0618 3.85674 14.9585 4.06143L3.44141 26.8715C3.15782 27.4332 3.36579 28.1276 3.90595 28.4224C4.06435 28.5092 4.24056 28.5543 4.41944 28.5543L15.9134 28.5522L15.9155 3.44671Z" fill="black" fillOpacity="0.439216"/>
+  </svg>
 )

@@ -2,6 +2,7 @@ const { widget } = figma
 const { AutoLayout, Fragment, SVG, Text, Line, usePropertyMenu, useSyncedState, useEffect, waitForTask, useWidgetId } = widget
 import { prosemirrorToWidgetReact } from './helpers'
 import { AssignedUser } from './components/AssignedUser'
+import { IssueEstimate } from './components/IssueEstimate'
 import { Labels } from './components/Labels'
 
 
@@ -400,6 +401,10 @@ function LinearAppWidget() {
 											<Text>In Progress</Text>
 										</AutoLayout>
 									</AutoLayout>
+									<IssueEstimate
+										estimate={linearIssue?.estimate}
+										type={linearIssue?.team?.issueEstimationType}
+									/>
 									<AutoLayout
 										spacing={4}
 									>

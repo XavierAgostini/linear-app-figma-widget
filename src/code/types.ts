@@ -11,6 +11,13 @@ export interface LinearIssue {
 	labels: {
 		nodes: { name: string; color: string; }[]
 	};
+	estimate: number | null;
+	team: {
+		issueEstimationAllowZero: boolean;
+		issueEstimationExtended: boolean;
+		defaultIssueEstimate: number;
+		issueEstimationType: "notUsed" | "exponential" | "linear" | "fibonacci" | "tShirt";
+	};
 	state: {
 		name: string;
 		color: string;

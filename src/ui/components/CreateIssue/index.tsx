@@ -4,9 +4,9 @@ import IconSelect, { Option } from "../IconSelect";
 import IconMultiSelect from "../IconMultiSelect";
 import { useLinearAuth } from '../../hooks/useLinearAuth';
 import { getLinearTeams, getLinearTeamMetadata, createLinearIssue } from '../../queries';
-import { LinearTeam, LinearTeamMetadata, LinearIssue, WorkflowStates } from '../../types';
+import { LinearTeam, LinearTeamMetadata, WorkflowStates } from '../../types';
 import { getLinearUserInitials } from '../../utils';
-import { LinearUnassignedIcon } from '../icons';
+import { LinearUnassignedIcon, LinearEstimateIcon } from '../icons';
 import classnames from 'classnames'
 
 import style from './style.module.css'
@@ -60,6 +60,7 @@ const CreateIssue = () => {
   const [assignedUser, setAssignedUser] = useState<AssignedUser | null>(null);
   const [priority, setPriority] = useState<Option | null>(null);
   const [status, setStatus] = useState<Option | null>(null);
+  const [estimate, setEstimate] = useState<Option | null>(null);
   const [labels, setLabels] = useState<AssignedUser[]>([]);
   const [isSaving, setIsSaving] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
@@ -135,6 +136,55 @@ const CreateIssue = () => {
 
   }, [selectedTeam]);
 
+  const ESTIMATE_OPTIONS = useMemo(() => {
+    if (!selectedTeam || selectedTeam.issueEstimationType === 'notUsed') return []
+
+    // These estimate options change the number of points that can be allocated to an issue
+    const { issueEstimationAllowZero, issueEstimationExtended } = selectedTeam
+    const start = issueEstimationAllowZero ? 0 : 1
+    const end = issueEstimationExtended ? 8 : 6
+
+    if (selectedTeam.issueEstimationType === 'linear') {
+      return [0,1,2,3,4,5,6,7].slice(start, end).map(value => ({
+        label: value.toString(),
+        value,
+        icon: <LinearEstimateIcon width={14} height={14}/>
+      }))
+    }
+    if (selectedTeam.issueEstimationType === 'exponential') {
+      return [0,1,2,4,8,16,32,64].slice(start, end).map(value => ({
+        label: value.toString(),
+        value,
+        icon: <LinearEstimateIcon width={16} height={16}/>
+      }))
+    }
+    if (selectedTeam.issueEstimationType === 'fibonacci') {
+      return [0,1,2,3,5,8,13,21].slice(start, end).map(value => ({
+        label: value.toString(),
+        value,
+        icon: <LinearEstimateIcon width={16} height={16}/>
+      }))
+    }
+    if (selectedTeam.issueEstimationType === 'tShirt') {
+      const tshirtSizeMap: {[key: number]: string} = {
+        0: issueEstimationAllowZero ? '-' : 'Not Estimated',
+        1: 'XS',
+        2: 'S',
+        3: 'M',
+        5: 'L',
+        8: 'XL',
+        13: 'XXL',
+        21: 'XXXL',
+      }
+      return [0,1,2,3,5,8,13,21].slice(0, end).map(value => ({
+        label: tshirtSizeMap[value],
+        value,
+        icon: <LinearEstimateIcon width={16} height={16}/>
+      }))
+    }
+    return []
+  }, [selectedTeam])
+
   const USERS = useMemo(() => {
     if (!selectedTeam) return []
     const unassigned = { label: 'Unassigned', value: 'unassigned', icon: LinearUnassignedIcon }
@@ -157,11 +207,15 @@ const CreateIssue = () => {
       e.preventDefault();
       if (!selectedTeam) return;
       setIsSaving(true)
+
+      const estimateValue = estimate ? estimate?.value : selectedTeam.defaultIssueEstimate
+
       const data = await createLinearIssue({
         token,
         teamId: selectedTeam.id,
         title,
         description,
+        estimate: estimateValue,
         userId: assignedUser?.value ? assignedUser.value : undefined,
         priorityNumber: priority?.value,
         stateId: status?.value || selectedTeam?.defaultIssueState?.id,
@@ -193,7 +247,6 @@ const CreateIssue = () => {
       }
       if (event.data.pluginMessage.type === 'get-figma-file-id-response') {
         const fileId = event.data.pluginMessage.data.figmaFileId;
-        console.log('get file id', fileId)
         setFigmaFileId(fileId)
       }
     }
@@ -222,6 +275,10 @@ const CreateIssue = () => {
     }
    
   }
+
+  const showEstimateField = selectedTeam?.issueEstimationType !== 'notUsed'
+  const defaultEstimateOption = ESTIMATE_OPTIONS.find(option => option.value === selectedTeam?.defaultIssueEstimate)
+
   if (token && isTeamInfoLoading && linearTeams.length === 0) {
     initializeLinearTeams()
   }
@@ -278,6 +335,14 @@ const CreateIssue = () => {
               onChange={setStatus}
               options={STATUS_OPTIONS}
             />
+            {showEstimateField && (
+              <IconSelect
+                isDisabled={isSaving}
+                defaultValue={defaultEstimateOption || ESTIMATE_OPTIONS[0]}
+                onChange={setEstimate}
+                options={ESTIMATE_OPTIONS}
+              />
+            )}
             <IconSelect
               isDisabled={isSaving}
               defaultValue={USERS[0]}
