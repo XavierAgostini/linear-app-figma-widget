@@ -1,4 +1,4 @@
-export type LinearStatusType = 'backlog' | 'unstarted' | 'started' | 'completed' | 'cancelled' | 'archived'
+export type LinearStatusType = 'backlog' | 'unstarted' | 'started' | 'completed' | 'canceled' | 'archived'
 
 export interface LinearIssue {
 	id: string;

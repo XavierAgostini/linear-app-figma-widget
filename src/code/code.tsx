@@ -13,7 +13,7 @@ import {
 	LinearBacklogIcon,
 	LinearInProgressIcon,
 	LinearTodoIcon,
-	LinearCancelledIcon,
+	LinearCanceledIcon,
 	LinearDoneIcon,
 	LinearHighPriorityIcon,
 	LinearMediumPriorityIcon,
@@ -209,7 +209,7 @@ function LinearAppWidget() {
 
 	const getLinearStatusIcon = (state: LinearIssue['state']) => {
 		const { type, color } = state;
-
+	
 		switch (type) {
 			case 'backlog':
 				return LinearBacklogIcon(color)
@@ -219,8 +219,8 @@ function LinearAppWidget() {
 				return LinearInProgressIcon(color)
 			case 'completed':
 				return LinearDoneIcon(color)
-			case 'cancelled':
-				return LinearCancelledIcon(color)
+			case 'canceled':
+				return LinearCanceledIcon(color)
 			default:
 				return LinearBacklogIcon(color)
 		}
@@ -398,7 +398,7 @@ function LinearAppWidget() {
 											spacing={8}
 										>
 											<SVG src={getLinearStatusIcon(linearIssue?.state)} />
-											<Text>In Progress</Text>
+											<Text>{linearIssue?.state?.name}</Text>
 										</AutoLayout>
 									</AutoLayout>
 									<IssueEstimate
