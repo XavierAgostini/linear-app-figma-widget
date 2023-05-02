@@ -15,7 +15,7 @@ import {
   LinearBacklogIcon,
 	LinearInProgressIcon,
 	LinearTodoIcon,
-	LinearCancelledIcon,
+	LinearCanceledIcon,
 	LinearDoneIcon,
   LinearUrgentPriorityIcon,
   LinearHighPriorityIcon,
@@ -38,7 +38,7 @@ const getLinearStateIconFromStateType = (type: WorkflowStates, color: string) =>
     unstarted: <LinearTodoIcon color={color} />,
     started: <LinearInProgressIcon color={color} />,
     completed: <LinearDoneIcon color={color} />,
-    canceled: <LinearCancelledIcon color={color} />,
+    canceled: <LinearCanceledIcon color={color} />,
   }
   return LinearStateIconMap[type]
 }
