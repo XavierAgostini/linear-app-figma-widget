@@ -158,7 +158,7 @@ const Settings = () => {
         </div>
         <div className={style.setting}>
             <label htmlFor="linear-project-slug">About</label>
-            <div>Plugin Version: <strong>7</strong></div>
+            <div>Plugin Version: <strong>8</strong></div>
           <div>
             <a href="#" target="_blank">Documentation</a>
           </div>
