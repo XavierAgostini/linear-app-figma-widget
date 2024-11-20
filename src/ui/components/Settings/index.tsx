@@ -3,7 +3,7 @@ import { useLinearAuth } from '../../hooks/useLinearAuth'
 import classnames from 'classnames'
 import style from './style.module.css'
 
-const FIGMA_FILE_REGEX = /https:\/\/www.figma.com\/file\/([a-zA-Z0-9]+)/
+const FIGMA_FILE_REGEX = /https:\/\/www.figma.com\/([^\/]+)\/([a-zA-Z0-9]+)/
 const FIGMA_FILE_URL = 'https://www.figma.com/file/'
 
 const Settings = () => {

@@ -14,7 +14,6 @@
     "tsc:ui": "tsc --noEmit -p src/ui",
     "build": "yarn run build:ui && yarn run build:main -- --minify",
     "build:ui": "yarn vite build --minify esbuild --emptyOutDir=false",
-
     "build:main": "esbuild src/code/code.tsx --bundle --outfile=dist/code.js",
     "build:watch": "concurrently -n widget,iframe \"yarn run build:main -- --watch\" \"yarn run build:ui -- --watch\"",
     "dev": "NODE_ENV=dev & concurrently -n tsc,build,vite --mode dev 'yarn tsc:watch' 'yarn:build:watch' -- --preserveWatchOutput --watch",
@@ -26,11 +25,18 @@
     "axios": "^1.3.4",
     "chroma-js": "^2.4.2",
     "classnames": "^2.3.2",
+    "prosemirror-model": "^1.23.0",
+    "prosemirror-schema-basic": "^1.2.3",
+    "prosemirror-state": "^1.4.3",
+    "prosemirror-view": "^1.36.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.9.0",
     "react-select": "^5.7.2",
-    "uuidv4": "^6.2.13"
+    "uuidv4": "^6.2.13",
+    "y-prosemirror": "^1.2.12",
+    "y-protocols": "^1.0.6",
+    "yjs": "^13.6.20"
   },
   "devDependencies": {
     "@babel/core": "^7.21.3",

@@ -4,8 +4,8 @@ export interface LinearIssue {
 	id: string;
 	identifier: string;
 	title: string;
-	description: string;
-	descriptionData: any;
+	description: any;
+	descriptionState: string;
 	priority: number;
 	priorityLabel: "High";
 	labels: {

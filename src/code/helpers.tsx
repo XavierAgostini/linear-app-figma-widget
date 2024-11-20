@@ -138,7 +138,7 @@ function renderListData(contentNode, nestingLevel = 0) {
 
 export function prosemirrorToWidgetReact(linearIssue: LinearIssue, openLinearTicketURL: () => void, openURL: (url: string) => void) {
   try {
-    const data = JSON.parse(linearIssue?.descriptionData)
+    const data = JSON.parse(linearIssue?.descriptionState)
     const children = data.content.map((contentNode, i) => {
       if (contentNode.type === 'paragraph') {
         return renderParagraphData(contentNode, i)

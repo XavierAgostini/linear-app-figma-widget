@@ -47,7 +47,7 @@ export interface LinearIssue {
   updatedAt: string;
   title: string;
   description: string;
-  descriptionData: string;
+  descriptionState: string;
   priority: number;
   priorityLabel: string;
   estimate: number | null;

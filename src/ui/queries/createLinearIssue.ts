@@ -34,7 +34,7 @@ mutation ($issueId: String!, $title: String!, $description: String!, $estimate: 
         identifier
         title
         description
-        descriptionData
+        descriptionState
         priority
         priorityLabel
         estimate
