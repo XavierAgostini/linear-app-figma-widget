@@ -40,7 +40,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.21.3",
-    "@figma/plugin-typings": "^1.49.0",
+    "@figma/plugin-typings": "*",
     "@figma/widget-typings": "^1.4.0",
     "@storybook/addon-actions": "^6.5.16",
     "@storybook/addon-essentials": "^6.5.16",

@@ -76,9 +76,9 @@ function LinearAppWidget() {
 		openPluginUI({ routeName: 'create-issue', props: {}, options: { visible: true, width: 440, height: 480, title: "Create Issue" }})
 	}
 
-	const createLinkedLinearWidget = ({type, data } : {type: string; data: LinearIssue}) => {
+	const createLinkedLinearWidget = async ({type, data } : {type: string; data: LinearIssue}) => {
 		try {
-			const widgetNode = figma.getNodeById(widgetNodeId) as WidgetNode;
+			const widgetNode = await figma.getNodeByIdAsync(widgetNodeId) as WidgetNode;
 			if (!widgetNode) return;
 			// check if linked issue already exists
 			

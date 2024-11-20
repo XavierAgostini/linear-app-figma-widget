@@ -9,6 +9,8 @@
     "ui": {
       "main": "dist/index.html"
     },
-    "widgetApi": "1.0.0"
+    "widgetApi": "1.0.0",
+    "documentAccess": "dynamic-page",
+    "networkAccess": { "allowedDomains": ["https://api.linear.app", "https://linear.app", "wss://auth.virtualyam.com/", "https://auth.virtualyam.com", "https://*.sentry.io", "https://uploads.linear.app", "https://*.linear.app"] }
   }
   
