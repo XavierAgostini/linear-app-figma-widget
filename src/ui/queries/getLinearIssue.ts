@@ -2,7 +2,7 @@ import axios from 'axios'
 import * as Y from 'yjs';
 import { schema } from 'prosemirror-schema-basic';
 import { Schema } from 'prosemirror-model';
-
+import { MarkdownParser,defaultMarkdownParser} from 'prosemirror-markdown';
 import { yXmlFragmentToProseMirrorRootNode, prosemirrorJSONToYDoc } from 'y-prosemirror';
 
 export const query = `
@@ -185,6 +185,26 @@ export const extendedSchema = new Schema({
     },
   },
 });
+
+/**
+ * Converts a Markdown string into a ProseMirror Node using ProseMirror's Markdown parser.
+ * 
+ * @param {string} markdown - The Markdown string to convert.
+ * @param {Schema} schema - The ProseMirror schema to use.
+ * @returns {Node} - The ProseMirror Node representing the document.
+ */
+export function markdownToProseMirror(markdown: string, schema = defaultMarkdownParser.schema) {
+  try {
+    const parser = new MarkdownParser(schema, defaultMarkdownParser.tokenizer, defaultMarkdownParser.tokens);
+    const doc =parser.parse(markdown);
+    return JSON.stringify(doc)
+  } catch (error) {
+    console.error('Error parsing Markdown:', error);
+    throw error;
+  }
+}
+
+// not using this anymore but keeping it here for now
 function decodeYjsStringToProseMirror(yjsString: string, fragmentKey = 'prosemirror') {
   try {
       // Decode the Yjs string into binary data
@@ -203,6 +223,7 @@ function decodeYjsStringToProseMirror(yjsString: string, fragmentKey = 'prosemir
       // Convert the Yjs fragment to ProseMirror JSON
       const prosemirrorJson = yXmlFragmentToProseMirrorRootNode(fragment,extendedSchema);
       return JSON.stringify(prosemirrorJson);
+      
   } catch (error) {
       console.error('Error decoding Yjs string:', error);
       throw error;
@@ -232,7 +253,7 @@ export const getLinearIssue = async (issueId: string, token: string) => {
     }
     const { issue } = linearData
     // Decode the descriptionState to ProseMirror JSON
-    const updatedDescriptionState = decodeYjsStringToProseMirror(issue?.descriptionState)
+    const updatedDescriptionState = markdownToProseMirror(issue?.description)
     issue.descriptionState = updatedDescriptionState
     return issue;
   } catch (error: any) {
